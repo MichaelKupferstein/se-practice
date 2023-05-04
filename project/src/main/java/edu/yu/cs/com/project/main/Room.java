@@ -7,6 +7,7 @@ public class Room implements RoomInterface {
     Guest current_guest;
     boolean isBooked;
     int roomNum;
+    Type roomType;
 
     public Room(int roomNum){
         this.roomNum = roomNum;
@@ -14,9 +15,18 @@ public class Room implements RoomInterface {
         this.current_guest = null;
     }
 
+    /**
+     *
+     * @return if no current guest return null
+     */
     @Override
     public Guest getCurrentGuest() {
-        return null;
+        return this.current_guest;
+    }
+
+    @Override
+    public void setCurrentGuest(Guest g) {
+        this.current_guest = g;
     }
 
     /**
@@ -24,7 +34,7 @@ public class Room implements RoomInterface {
      */
     @Override
     public Type getRoomType() {
-        return null;
+        return this.roomType;
     }
 
     /**
@@ -34,11 +44,14 @@ public class Room implements RoomInterface {
      */
     @Override
     public void setRoomType(Type t) {
-
+        if(!(t instanceof Type)){
+            throw new IllegalArgumentException();
+        }
+        this.roomType = t;
     }
 
     @Override
     public boolean isOccupied() {
-        return false;
+        return isBooked;
     }
 }

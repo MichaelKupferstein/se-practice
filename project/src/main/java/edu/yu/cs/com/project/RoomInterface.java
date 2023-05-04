@@ -12,6 +12,7 @@ public interface RoomInterface {
         private Type(int p) {this.size = p;}
     }
     public Guest getCurrentGuest();
+    public void setCurrentGuest(Guest g);
     /**
      * Get type of room
      */
