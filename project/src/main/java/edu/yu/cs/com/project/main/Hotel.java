@@ -1,6 +1,8 @@
 package edu.yu.cs.com.project.main;
 
 import edu.yu.cs.com.project.HotelInterface;
+import edu.yu.cs.com.project.RoomInterface;
+import edu.yu.cs.com.project.RoomInterface.Type;
 import edu.yu.cs.com.project.people.Employee;
 import edu.yu.cs.com.project.people.Guest;
 
@@ -26,15 +28,26 @@ public class Hotel implements HotelInterface {
         int numOfSuits = (int) Math.floor((20.0 / 100.0) * numRooms);
         int numOfDouble = (int) Math.floor((50.0 / 100.0) * numRooms);
         int numOfSingle = (int) Math.floor((30.0 / 100.0) * numRooms);
+        numRooms++;
+        int count = 1;
+        count = createRooms(numOfSingle,count, Type.SINGLE);
+        System.out.println(count);
+        count = createRooms(numOfDouble,count, Type.TWO_BED);
+        System.out.println(count);
+        count = createRooms(numOfSuits,count, Type.SUITE);
+        System.out.println(count);
+        count = createRooms(numOfPres,count,Type.PRESIDENTIAL);
+        createRooms(numRooms - count+1,count,Type.SINGLE);
+    }
 
-        for(int i = 0; i < numRooms + 1; i++){
-            if(i < numOfSuits){
-
-            }
+    private int createRooms(int numOfRoom, int roomNumber, Type type){
+        for(int i = 0; i < numOfRoom; i++){
+            Room newRoom = new Room(roomNumber);
+            newRoom.setRoomType(type);
+            this.rooms.add(newRoom);
+            roomNumber++;
         }
-
-
-
+        return roomNumber;
     }
 
     @Override
@@ -44,7 +57,7 @@ public class Hotel implements HotelInterface {
 
     @Override
     public List<Room> getAvailRooms() {
-        return null;
+        return this.rooms;
     }
 
     @Override

@@ -54,4 +54,9 @@ public class Room implements RoomInterface {
     public boolean isOccupied() {
         return isBooked;
     }
+
+    @Override
+    public String toString() {
+        return this.roomType + " " + this.roomNum;
+    }
 }
