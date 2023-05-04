@@ -12,6 +12,7 @@ import java.util.List;
 public class Hotel implements HotelInterface {
     private ArrayList<Room> rooms;
     private Employee[] employees;
+    private ArrayList<Reservation> reservations;
     private String hotelName;
 
     public Hotel(String hotelName){
@@ -90,5 +91,10 @@ public class Hotel implements HotelInterface {
     @Override
     public Guest findGuest(String name, int id) {
         return null;
+    }
+
+    @Override
+    public boolean setReservation(Reservation reservation) {
+        return false;
     }
 }

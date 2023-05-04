@@ -1,5 +1,6 @@
 package edu.yu.cs.com.project;
 
+import edu.yu.cs.com.project.main.Reservation;
 import edu.yu.cs.com.project.main.Room;
 import edu.yu.cs.com.project.people.Guest;
 
@@ -23,7 +24,11 @@ public interface HotelInterface {
 
     public Guest findGuest(String name, int id);
 
-
+    /**
+     * Book a reservation
+     * @return true if it booked successfully and false if not
+     * */
+    public boolean setReservation(Reservation reservation);
 
 
 }
