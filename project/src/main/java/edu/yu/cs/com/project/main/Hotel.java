@@ -5,12 +5,16 @@ import edu.yu.cs.com.project.people.Employee;
 import edu.yu.cs.com.project.people.Guest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel implements HotelInterface {
-    ArrayList<Room> rooms;
-    Employee[] employees;
+    private ArrayList<Room> rooms;
+    private Employee[] employees;
+    private String hotelName;
 
-    public Hotel(){}
+    public Hotel(String hotelName){
+        this.hotelName = hotelName;
+    }
 
 
     @Override
@@ -24,13 +28,13 @@ public class Hotel implements HotelInterface {
     }
 
     @Override
-    public int getAvailRooms() {
-        return 0;
+    public List<Room> getAvailRooms() {
+        return null;
     }
 
     @Override
-    public int getOccupiedRooms() {
-        return 0;
+    public List<Room> getOccupiedRooms() {
+        return null;
     }
 
     /**

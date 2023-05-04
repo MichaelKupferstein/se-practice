@@ -13,16 +13,23 @@ public class Employee extends Person {
         this.ID = id;
     }
 
+    public void setHours(double hours) {
+        this.hours = hours;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
+    }
     public double getHours() {
         return hours;
     }
 
     public String getPosition() {
         return position;
-    }
-
-    public void setIsOn(){
-        this.isOn = true;
     }
 
     public boolean isOn(){
