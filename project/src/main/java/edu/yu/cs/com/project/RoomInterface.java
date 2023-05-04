@@ -16,11 +16,11 @@ public interface RoomInterface {
      * Get type of room
      */
     public Type getRoomType();
-
     /**
      * Set new roomType
      */
-    public void changeRoomType(Type t);
+    public void setRoomType(Type t);
 
+    public boolean isOccupied();
 
 }
