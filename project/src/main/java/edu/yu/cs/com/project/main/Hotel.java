@@ -14,11 +14,26 @@ public class Hotel implements HotelInterface {
 
     public Hotel(String hotelName){
         this.hotelName = hotelName;
+        this.rooms = new ArrayList<>();
     }
 
 
     @Override
     public void setNumberOfRooms(int numRooms) {
+        //of the numbers of room, there is one presidnatial, then from the reaming 20% are suits, 50% are two bed 30% are single
+        int numOfPres = 1;
+        numRooms--;
+        int numOfSuits = (int) Math.floor((20.0 / 100.0) * numRooms);
+        int numOfDouble = (int) Math.floor((50.0 / 100.0) * numRooms);
+        int numOfSingle = (int) Math.floor((30.0 / 100.0) * numRooms);
+
+        for(int i = 0; i < numRooms + 1; i++){
+            if(i < numOfSuits){
+
+            }
+        }
+
+
 
     }
 
