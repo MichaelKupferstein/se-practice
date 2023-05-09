@@ -23,7 +23,7 @@ public abstract class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person person)) return false;
-        return getAge() == person.getAge() && getID() == person.getID() && Objects.equals(getName(), person.getName());
+        return getID() == person.getID() && Objects.equals(getName(), person.getName());
     }
 
     @Override

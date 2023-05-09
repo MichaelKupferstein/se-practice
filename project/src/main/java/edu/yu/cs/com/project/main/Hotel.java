@@ -53,28 +53,71 @@ public class Hotel implements HotelInterface {
 
     @Override
     public int getNumberOfRooms() {
-        return 0;
+        return this.rooms.size();
     }
 
     @Override
     public List<Room> getAvailRooms() {
-        return this.rooms;
+        return this.rooms;//filter through to see aviable
     }
 
     @Override
     public List<Room> getOccupiedRooms() {
-        return null;
+        return null;//filter throught to see which ones are booked
     }
 
     /**
-     * Find all matching rooms with the given amount of beds
+     * Find all matching rooms with the given amount of capacity
      *
      * @param beds
      * @return Room that matches
      */
     @Override
-    public Room roomSearchByBeds(int beds) {
-        return null;
+    public List<Room> roomSearchByCap(int cap) {
+        ArrayList<Room> results = new ArrayList<>();
+        switch (cap){
+            case 1:
+                //return all rooms with single beds
+                results.addAll(getAllRooms(Type.SINGLE));
+                break;
+            case 2:
+                //return all double rooms
+                results.addAll(getAllRooms(Type.TWO_BED));
+                break;
+            case 3:
+                //suits
+                results.addAll(getAllRooms(Type.SUITE));
+                break;
+            case 4:
+                //return all suit rooms
+                results.addAll(getAllRooms(Type.SUITE));
+                break;
+            case 5:
+                //return all suite rooms
+                results.addAll(getAllRooms(Type.SUITE));
+                break;
+            case 6:
+                //return presdident room
+                results.addAll(getAllRooms(Type.PRESIDENTIAL));
+                break;
+            case 7:
+                //return president room
+                results.addAll(getAllRooms(Type.PRESIDENTIAL));
+                break;
+            default:
+                //room doesnt exists
+        }
+        return results;
+    }
+
+    private List<Room> getAllRooms(RoomInterface.Type type){
+        ArrayList<Room> results = new ArrayList<>();
+        for(Room r : this.rooms){
+            if(r.getRoomType() == type){
+                results.add(r);
+            }
+        }
+        return results;
     }
 
     /**
@@ -85,12 +128,18 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public Room roomSearchByNumber(int roomNum) {
-        return null;
+        return this.rooms.get(roomNum - 1);
     }
 
     @Override
     public Guest findGuest(String name, int id) {
-        return null;
+        Guest temp = new Guest(name,id);
+        for(Room r : this.rooms){
+            if(r.getCurrentGuest().equals(temp)){
+                return r.getCurrentGuest();
+            }
+        }
+        return null; //coudnt find guesr
     }
 
     @Override

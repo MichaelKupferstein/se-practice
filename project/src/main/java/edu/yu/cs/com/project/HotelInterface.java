@@ -12,10 +12,10 @@ public interface HotelInterface {
     public List<Room> getAvailRooms();
     public List<Room> getOccupiedRooms();
     /**
-     * Find all matching rooms with the given amount of beds
+     * Find all matching rooms with the given amount of space for given int
      * @return Room that matches
      */
-    public Room roomSearchByBeds(int beds);
+    public List<Room> roomSearchByCap(int cap);
 
     /**Search for room by the room number (should only return 1)
      *return the matching room object
