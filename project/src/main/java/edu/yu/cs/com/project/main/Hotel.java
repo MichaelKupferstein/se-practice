@@ -58,12 +58,24 @@ public class Hotel implements HotelInterface {
 
     @Override
     public List<Room> getAvailRooms() {
-        return this.rooms;//filter through to see aviable
+        ArrayList<Room> results = new ArrayList<>();
+        for(Room r : this.rooms){
+            if(!r.isBooked){
+                results.add(r);
+            }
+        }
+        return results;
     }
 
     @Override
-    public List<Room> getOccupiedRooms() {
-        return null;//filter throught to see which ones are booked
+    public List<Room> getBookedRooms() {
+        ArrayList<Room> results = new ArrayList<>();
+        for(Room r : this.rooms){
+            if(r.isBooked){
+                results.add(r);
+            }
+        }
+        return results;
     }
 
     /**
@@ -76,36 +88,14 @@ public class Hotel implements HotelInterface {
     public List<Room> roomSearchByCap(int cap) {
         ArrayList<Room> results = new ArrayList<>();
         switch (cap){
-            case 1:
-                //return all rooms with single beds
-                results.addAll(getAllRooms(Type.SINGLE));
-                break;
-            case 2:
-                //return all double rooms
-                results.addAll(getAllRooms(Type.TWO_BED));
-                break;
-            case 3:
-                //suits
-                results.addAll(getAllRooms(Type.SUITE));
-                break;
-            case 4:
-                //return all suit rooms
-                results.addAll(getAllRooms(Type.SUITE));
-                break;
-            case 5:
-                //return all suite rooms
-                results.addAll(getAllRooms(Type.SUITE));
-                break;
-            case 6:
-                //return presdident room
-                results.addAll(getAllRooms(Type.PRESIDENTIAL));
-                break;
-            case 7:
-                //return president room
-                results.addAll(getAllRooms(Type.PRESIDENTIAL));
-                break;
-            default:
-                //room doesnt exists
+            case 1: results.addAll(getAllRooms(Type.SINGLE)); break;//return all rooms with single beds
+            case 2: results.addAll(getAllRooms(Type.TWO_BED)); break;//return all double rooms
+            case 3: results.addAll(getAllRooms(Type.SUITE)); break;//suits
+            case 4: results.addAll(getAllRooms(Type.SUITE)); break;//return all suit rooms
+            case 5: results.addAll(getAllRooms(Type.SUITE)); break;//return all suite rooms
+            case 6: results.addAll(getAllRooms(Type.PRESIDENTIAL)); break;//return presdident room
+            case 7: results.addAll(getAllRooms(Type.PRESIDENTIAL)); break;//return president room
+            default://room doesnt exists
         }
         return results;
     }

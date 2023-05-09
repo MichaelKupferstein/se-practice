@@ -10,7 +10,7 @@ public interface HotelInterface {
     public void setNumberOfRooms(int numRooms);
     public int getNumberOfRooms();
     public List<Room> getAvailRooms();
-    public List<Room> getOccupiedRooms();
+    public List<Room> getBookedRooms();
     /**
      * Find all matching rooms with the given amount of space for given int
      * @return Room that matches
