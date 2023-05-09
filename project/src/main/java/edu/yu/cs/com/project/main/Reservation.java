@@ -65,5 +65,19 @@ public class Reservation {
         this.reservationID = reservationID;
     }
 
+    public boolean overlapsWith(Reservation other) {
+        // Check if the check-in date of the other reservation is before the check-out date of this reservation
+        if (other.getCheckInDate().before(this.checkOutDate)) {
+            // Check if the check-out date of the other reservation is after the check-in date of this reservation
+            if (other.getCheckOutDate().after(this.checkInDate)) {
+                // The reservations overlap
+                return true;
+            }
+        }
+        // The reservations do not overlap
+        return false;
+    }
+
+
 }
 

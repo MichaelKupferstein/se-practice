@@ -7,13 +7,16 @@ import edu.yu.cs.com.project.people.Employee;
 import edu.yu.cs.com.project.people.Guest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hotel implements HotelInterface {
     private ArrayList<Room> rooms;
     private Employee[] employees;
     private ArrayList<Reservation> reservations;
     private String hotelName;
+    private Map<Guest,Reservation> guestReservationMap = new HashMap<>();
 
     public Hotel(String hotelName){
         this.hotelName = hotelName;
@@ -132,8 +135,30 @@ public class Hotel implements HotelInterface {
         return null; //coudnt find guesr
     }
 
+
+
     @Override
-    public boolean setReservation(Reservation reservation) {
+    public boolean setReservation(Room room, Guest guest, Reservation reservation) {
+        //if there is a reservation that overlaps with this one return false
+        if(isOverlapping(room.getReservations(),reservation)){
+            return false;
+        }
+        //if not the reservation and return true
+        this.guestReservationMap.put(guest,reservation);
         return false;
     }
+
+    private boolean isOverlapping(List<Reservation> reservations, Reservation newReservation) {
+        // Check if the new reservation overlaps with any existing reservations
+        for (Reservation reservation : reservations) {
+            if (reservation.overlapsWith(newReservation)) {
+                // The new reservation overlaps with an existing reservation
+                return true;
+            }
+        }
+        // The new reservation does not overlap with any existing reservations
+        return false;
+    }
+
+
 }

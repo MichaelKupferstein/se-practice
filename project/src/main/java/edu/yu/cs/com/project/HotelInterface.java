@@ -28,7 +28,7 @@ public interface HotelInterface {
      * Book a reservation
      * @return true if it booked successfully and false if not
      * */
-    public boolean setReservation(Reservation reservation);
+    public boolean setReservation(Room room, Guest guest, Reservation reservation);
 
 
 }
