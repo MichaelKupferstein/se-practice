@@ -2,7 +2,7 @@ package edu.yu.cs.com.project.main;
 
 import edu.yu.cs.com.project.people.Guest;
 
-import java.util.Calendar;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -20,7 +20,7 @@ public class Reservation {
         this.reservationID = reservationID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
-        if(checkInDate.getCurrentVal() < checkOutDate.getCurrentVal()){
+        if(checkInDate.getCurrentVal() > checkOutDate.getCurrentVal()){
             throw new IllegalArgumentException("Checkout cannot be before Checkin");
         }
     }

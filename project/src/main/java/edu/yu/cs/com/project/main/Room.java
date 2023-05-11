@@ -84,4 +84,8 @@ public class Room implements RoomInterface {
     public String toString() {
         return this.roomType + " " + this.roomNum;
     }
+
+    public void setIsBooked() {
+        this.isBooked = true;
+    }
 }

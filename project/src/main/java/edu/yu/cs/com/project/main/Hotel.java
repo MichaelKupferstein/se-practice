@@ -19,11 +19,13 @@ public class Hotel implements HotelInterface {
     public Hotel(String hotelName){
         this.hotelName = hotelName;
         this.rooms = new ArrayList<>();
+        this.reservations = new ArrayList<>();
     }
 
 
     @Override
     public void setNumberOfRooms(int numRooms) {
+        if(numRooms < 10) throw new IllegalArgumentException("Hotel must have more then 10 rooms");
         //of the numbers of room, there is one presidnatial, then from the reaming 20% are suits, 50% are two bed 30% are single
         int numOfPres = 1;
         numRooms--;
@@ -142,13 +144,17 @@ public class Hotel implements HotelInterface {
         List<Room> rooms = roomSearchByCap(cap);
         Room room = getSpecifiedRoom(rooms);
         if(room == null) return false;//no room for this cap
-        reservation.setRoomNumber(room.getRoomNum());
         //if there is a reservation that overlaps with this one return false
         if(isOverlapping(room.getReservations(),reservation)){
             return false;
         }
+        reservation.setRoomNumber(room.getRoomNum());
+        room.setIsBooked();
+        room.addReservation(reservation);
+        room.setCurrentGuest(guest);
         //if not the reservation and return true
         this.guestReservationMap.put(guest,reservation);
+        this.reservations.add(reservation);
         return false;
     }
 
