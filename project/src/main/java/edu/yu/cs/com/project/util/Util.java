@@ -3,8 +3,8 @@ import java.util.Random;
 
 
 public class Util {
-    private final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private final int ID_LENGTH = 8;
+    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int ID_LENGTH = 8;
     public static String generateReservationId() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();

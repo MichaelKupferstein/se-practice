@@ -4,6 +4,7 @@ import edu.yu.cs.com.project.main.Reservation;
 import edu.yu.cs.com.project.main.Room;
 import edu.yu.cs.com.project.people.Guest;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface HotelInterface {
      * Book a reservation
      * @return true if it booked successfully and false if not
      * */
-    public boolean setReservation(Guest guest, int cap, Date checkInDate, Date checkOutDate );
+    public boolean setReservation(Guest guest, int cap, Calendar checkInDate, Calendar checkOutDate );
 
 
 }
