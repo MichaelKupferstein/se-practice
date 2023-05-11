@@ -6,10 +6,7 @@ import edu.yu.cs.com.project.RoomInterface.Type;
 import edu.yu.cs.com.project.people.Employee;
 import edu.yu.cs.com.project.people.Guest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Hotel implements HotelInterface {
     private ArrayList<Room> rooms;
@@ -138,7 +135,10 @@ public class Hotel implements HotelInterface {
 
 
     @Override
-    public boolean setReservation(Room room, Guest guest, Reservation reservation) {
+    public boolean setReservation(Guest guest, int cap, Date checkInDate, Date checkOutDate ) {
+        Reservation reservation = new Reservation(null,null,null,null,null);
+        List<Room> rooms = roomSearchByCap(cap);
+        Room room = getSpecifiedRoom(rooms);
         //if there is a reservation that overlaps with this one return false
         if(isOverlapping(room.getReservations(),reservation)){
             return false;
@@ -146,6 +146,10 @@ public class Hotel implements HotelInterface {
         //if not the reservation and return true
         this.guestReservationMap.put(guest,reservation);
         return false;
+    }
+
+    private Room getSpecifiedRoom(List<Room> rooms) {
+        return null;
     }
 
     private boolean isOverlapping(List<Reservation> reservations, Reservation newReservation) {
