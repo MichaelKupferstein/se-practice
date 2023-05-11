@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room implements RoomInterface {
-    Guest current_guest;
-    boolean isBooked;
-    int roomNum;
-    Type roomType;
+    private Guest current_guest;
+    private boolean isBooked;
+    private int roomNum;
+    private Type roomType;
     private ArrayList<Reservation> reservations;
 
     public Room(int roomNum){
@@ -18,6 +18,18 @@ public class Room implements RoomInterface {
         this.isBooked = false;
         this.current_guest = null;
         this.reservations = new ArrayList<>();
+    }
+
+    public Guest getCurrent_guest() {
+        return current_guest;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public int getRoomNum() {
+        return roomNum;
     }
 
     public void addReservation(Reservation reservation){
