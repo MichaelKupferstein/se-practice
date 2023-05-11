@@ -84,7 +84,7 @@ public class Hotel implements HotelInterface {
     /**
      * Find all matching rooms with the given amount of capacity
      *
-     * @param beds
+     * @param cap
      * @return Room that matches
      */
     @Override
