@@ -5,12 +5,10 @@ import edu.yu.cs.com.project.RoomInterface;
 import edu.yu.cs.com.project.RoomInterface.Type;
 import edu.yu.cs.com.project.people.Employee;
 import edu.yu.cs.com.project.people.Guest;
+import edu.yu.cs.com.project.util.Util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
+import edu.yu.cs.com.project.util.Util;
 public class Hotel implements HotelInterface {
     private ArrayList<Room> rooms;
     private Employee[] employees;
@@ -63,7 +61,7 @@ public class Hotel implements HotelInterface {
     public List<Room> getAvailRooms() {
         ArrayList<Room> results = new ArrayList<>();
         for(Room r : this.rooms){
-            if(!r.isBooked){
+            if(!r.isBooked()){
                 results.add(r);
             }
         }
@@ -74,7 +72,7 @@ public class Hotel implements HotelInterface {
     public List<Room> getBookedRooms() {
         ArrayList<Room> results = new ArrayList<>();
         for(Room r : this.rooms){
-            if(r.isBooked){
+            if(r.isBooked()){
                 results.add(r);
             }
         }
@@ -138,7 +136,12 @@ public class Hotel implements HotelInterface {
 
 
     @Override
-    public boolean setReservation(Room room, Guest guest, Reservation reservation) {
+    public boolean setReservation(Guest guest, int cap, Date checkInDate, Date checkOutDate ) {
+        Reservation reservation = new Reservation(guest,checkInDate,checkOutDate,-1, Util.generateReservationId());
+        List<Room> rooms = roomSearchByCap(cap);
+        Room room = getSpecifiedRoom(rooms);
+        if(room == null) return false;//no room for this cap
+        reservation.setRoomNumber(room.getRoomNum());
         //if there is a reservation that overlaps with this one return false
         if(isOverlapping(room.getReservations(),reservation)){
             return false;
@@ -146,6 +149,15 @@ public class Hotel implements HotelInterface {
         //if not the reservation and return true
         this.guestReservationMap.put(guest,reservation);
         return false;
+    }
+
+    private Room getSpecifiedRoom(List<Room> rooms) {
+        for(Room r : rooms){
+            if(!r.isBooked()){
+                return r;
+            }
+        }
+        return null; //no room is avilible for this cap;
     }
 
     private boolean isOverlapping(List<Reservation> reservations, Reservation newReservation) {

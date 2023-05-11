@@ -2,18 +2,18 @@ package edu.yu.cs.com.project.main;
 
 import edu.yu.cs.com.project.people.Guest;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.Calendar;
 
 public class Reservation {
     private Guest guest;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private Calendar checkInDate;
+    private Calendar checkOutDate;
     private int roomNumber;
     private String reservationID;
 
-    public Reservation(Guest guest, Date checkInDate, Date checkOutDate, int roomNumber, String reservationID) {
+    public Reservation(Guest guest, Calendar checkInDate, Calendar checkOutDate, int roomNumber, String reservationID) {
         this.guest = guest;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -22,7 +22,7 @@ public class Reservation {
     }
 
     public int getLengthOfStay() {
-        long diff = this.checkOutDate.getTime() - this.checkInDate.getTime();
+        long diff = this.checkOutDate.getTimeInMillis() - this.checkInDate.getTimeInMillis();
         return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
@@ -34,19 +34,19 @@ public class Reservation {
         this.guest = guest;
     }
 
-    public Date getCheckInDate() {
+    public Calendar getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(Calendar checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    public Date getCheckOutDate() {
+    public Calendar getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(Calendar checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
@@ -78,7 +78,4 @@ public class Reservation {
         // The reservations do not overlap
         return false;
     }
-
-
 }
-
