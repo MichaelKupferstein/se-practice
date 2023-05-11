@@ -4,26 +4,30 @@ import edu.yu.cs.com.project.people.Guest;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-import java.util.Calendar;
+
+
 
 public class Reservation {
     private Guest guest;
-    private Calendar checkInDate;
-    private Calendar checkOutDate;
     private int roomNumber;
     private String reservationID;
+    private Date checkInDate;
+    private Date checkOutDate;
 
-    public Reservation(Guest guest, Calendar checkInDate, Calendar checkOutDate, int roomNumber, String reservationID) {
+    public Reservation(Guest guest, Date checkInDate, Date checkOutDate, int roomNumber, String reservationID) {
         this.guest = guest;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
         this.roomNumber = roomNumber;
         this.reservationID = reservationID;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        if(checkInDate.getCurrentVal() < checkOutDate.getCurrentVal()){
+            throw new IllegalArgumentException("Checkout cannot be before Checkin");
+        }
     }
 
     public int getLengthOfStay() {
-        long diff = this.checkOutDate.getTimeInMillis() - this.checkInDate.getTimeInMillis();
-        return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        int lengthOfStay = this.checkInDate.compareTo(checkOutDate);
+        return lengthOfStay;
     }
 
     public Guest getGuestName() {
@@ -34,19 +38,19 @@ public class Reservation {
         this.guest = guest;
     }
 
-    public Calendar getCheckInDate() {
+    public Date getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(Calendar checkInDate) {
+    public void setCheckInDate(Date checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    public Calendar getCheckOutDate() {
+    public Date getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(Calendar checkOutDate) {
+    public void setCheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
@@ -68,9 +72,9 @@ public class Reservation {
 
     public boolean overlapsWith(Reservation other) {
         // Check if the check-in date of the other reservation is before the check-out date of this reservation
-        if (other.getCheckInDate().before(this.checkOutDate)) {
+        if (other.getCheckInDate().compareTo(this.checkOutDate) < 0) {
             // Check if the check-out date of the other reservation is after the check-in date of this reservation
-            if (other.getCheckOutDate().after(this.checkInDate)) {
+            if (other.getCheckOutDate().compareTo(this.checkInDate) > 0) {
                 // The reservations overlap
                 return true;
             }

@@ -137,7 +137,7 @@ public class Hotel implements HotelInterface {
 
 
     @Override
-    public boolean setReservation(Guest guest, int cap, Calendar checkInDate, Calendar checkOutDate) {
+    public boolean setReservation(Guest guest, int cap, Date checkInDate, Date checkOutDate) {
         Reservation reservation = new Reservation(guest,checkInDate,checkOutDate,-1, Util.generateReservationId());
         List<Room> rooms = roomSearchByCap(cap);
         Room room = getSpecifiedRoom(rooms);
